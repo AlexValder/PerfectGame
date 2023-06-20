@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://5fjqqxghmthx"]
+
+[ext_resource type="FontFile" uid="uid://cd2uvmainbr1d" path="res://assets/fonts/blazma-regular.otf" id="1_1wefo"]
+
+[resource]
+default_font = ExtResource("1_1wefo")
+default_font_size = 32

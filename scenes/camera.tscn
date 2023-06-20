@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://d20o6kxxjqckn"]
+
+[ext_resource type="Script" path="res://scenes/player_camera.gd" id="1_spy4b"]
+[ext_resource type="Environment" uid="uid://c24w8n5qcm5ig" path="res://assets/env/default.tres" id="1_tavq2"]
+
+[node name="camera" type="Node3D"]
+script = ExtResource("1_spy4b")
+mouse_sensitivity = 0.005
+
+[node name="arm" type="SpringArm3D" parent="."]
+spring_length = 5.0
+
+[node name="camera" type="Camera3D" parent="arm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+environment = ExtResource("1_tavq2")
