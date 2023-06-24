@@ -1,0 +1,161 @@
+[gd_scene load_steps=20 format=3 uid="uid://b4mahc8xt2ex0"]
+
+[ext_resource type="Texture2D" uid="uid://8wgmswpropjl" path="res://assets/textures/grass_00.png" id="1_pj8kk"]
+[ext_resource type="Texture2D" uid="uid://byef3asdqko3n" path="res://assets/textures/bricks.png" id="2_x7xpn"]
+[ext_resource type="Environment" uid="uid://c24w8n5qcm5ig" path="res://assets/env/default.tres" id="3_3x1w2"]
+[ext_resource type="PackedScene" uid="uid://cbjtmyds32hcx" path="res://scenes/buildings/house.tscn" id="3_eqygd"]
+[ext_resource type="Texture2D" uid="uid://sxophoih4t46" path="res://assets/textures/metal.png" id="4_v5gjh"]
+[ext_resource type="PackedScene" uid="uid://ba5bnn3lmdtr7" path="res://scenes/player/player.tscn" id="4_vu6fj"]
+[ext_resource type="PackedScene" uid="uid://dfsermoacr5gf" path="res://scenes/items/knife.tscn" id="5_b17kn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2geod"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_pj8kk")
+uv1_scale = Vector3(0.4, 0.4, 0.4)
+uv1_triplanar = true
+uv1_world_triplanar = true
+distance_fade_max_distance = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ptha5"]
+size = Vector2(40, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tmm3f"]
+size = Vector3(40, 20, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ras20"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_x7xpn")
+uv1_triplanar = true
+texture_filter = 5
+distance_fade_max_distance = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_2w0yx"]
+material = SubResource("StandardMaterial3D_ras20")
+size = Vector2(40, 3)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_t36gd"]
+data = PackedVector3Array(20, -1.5, 0, -20, -1.5, 0, 20, 1.5, 0, -20, -1.5, 0, -20, 1.5, 0, 20, 1.5, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_7k2hc"]
+material = SubResource("StandardMaterial3D_ras20")
+size = Vector2(40, 3)
+
+[sub_resource type="QuadMesh" id="QuadMesh_oy8s5"]
+material = SubResource("StandardMaterial3D_ras20")
+size = Vector2(20, 3)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fpomw"]
+data = PackedVector3Array(10, -1.5, 0, -10, -1.5, 0, 10, 1.5, 0, -10, -1.5, 0, -10, 1.5, 0, 10, 1.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ah2aq"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_v5gjh")
+uv1_triplanar = true
+uv1_world_triplanar = true
+distance_fade_mode = 1
+distance_fade_max_distance = 1.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_afm33"]
+lightmap_size_hint = Vector2i(39, 46)
+material = SubResource("StandardMaterial3D_ah2aq")
+left_to_right = 1.0
+size = Vector3(5, 3, 2)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fhnaa"]
+data = PackedVector3Array(2.5, 1.5, 1, 2.5, -1.5, 1, -2.5, -1.5, 1, 2.5, 1.5, -1, -2.5, -1.5, -1, 2.5, -1.5, -1, 2.5, 1.5, 1, 2.5, 1.5, -1, 2.5, -1.5, 1, 2.5, 1.5, -1, 2.5, -1.5, -1, 2.5, -1.5, 1, 2.5, 1.5, -1, 2.5, 1.5, 1, -2.5, -1.5, -1, 2.5, 1.5, 1, -2.5, -1.5, 1, -2.5, -1.5, -1, -2.5, -1.5, 1, 2.5, -1.5, 1, -2.5, -1.5, -1, 2.5, -1.5, 1, 2.5, -1.5, -1, -2.5, -1.5, -1)
+
+[node name="test_scene" type="Node3D"]
+
+[node name="level" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="floor" type="MeshInstance3D" parent="level"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_2geod")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_ptha5")
+skeleton = NodePath("")
+
+[node name="static_body" type="StaticBody3D" parent="level/floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.183e-09, -0.0499411)
+collision_mask = 15
+
+[node name="shape" type="CollisionShape3D" parent="level/floor/static_body"]
+shape = SubResource("BoxShape3D_tmm3f")
+
+[node name="wall_00" type="MeshInstance3D" parent="level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -10)
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("QuadMesh_2w0yx")
+
+[node name="static_body" type="StaticBody3D" parent="level/wall_00"]
+
+[node name="shape" type="CollisionShape3D" parent="level/wall_00/static_body"]
+shape = SubResource("ConcavePolygonShape3D_t36gd")
+
+[node name="wall_01" type="MeshInstance3D" parent="level"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.5, 10)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_7k2hc")
+
+[node name="static_body" type="StaticBody3D" parent="level/wall_01"]
+
+[node name="shape" type="CollisionShape3D" parent="level/wall_01/static_body"]
+shape = SubResource("ConcavePolygonShape3D_t36gd")
+
+[node name="wall_02" type="MeshInstance3D" parent="level"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 20, 1.5, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_oy8s5")
+
+[node name="static_body" type="StaticBody3D" parent="level/wall_02"]
+collision_mask = 15
+
+[node name="shape" type="CollisionShape3D" parent="level/wall_02/static_body"]
+shape = SubResource("ConcavePolygonShape3D_fpomw")
+
+[node name="wall_03" type="MeshInstance3D" parent="level"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -20, 1.5, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_oy8s5")
+
+[node name="static_body" type="StaticBody3D" parent="level/wall_03"]
+collision_mask = 15
+
+[node name="shape" type="CollisionShape3D" parent="level/wall_03/static_body"]
+shape = SubResource("ConcavePolygonShape3D_fpomw")
+
+[node name="house" parent="level" instance=ExtResource("3_eqygd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4442, 0, 4.24755)
+
+[node name="ramp" type="MeshInstance3D" parent="level"]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1, -5.051, 1.5, -3.189)
+mesh = SubResource("PrismMesh_afm33")
+
+[node name="static_body" type="StaticBody3D" parent="level/ramp"]
+
+[node name="shape" type="CollisionShape3D" parent="level/ramp/static_body"]
+shape = SubResource("ConcavePolygonShape3D_fhnaa")
+
+[node name="player" parent="." instance=ExtResource("4_vu6fj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.8475, 0.808494, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -11.8475, 3.03743, 0)
+light_energy = 2.455
+spot_range = 4.267
+spot_attenuation = 0.0647042
+spot_angle = 58.71
+spot_angle_attenuation = 0.0457527
+
+[node name="knife" parent="." instance=ExtResource("5_b17kn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.183, 0, 4.70308)
+speed = null
+id = null
+
+[node name="env" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_3x1w2")

@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cd2uvmainbr1d"
-path="res://.godot/imported/blazma-regular.otf-2fed7a707df439b2801443435ec91d93.fontdata"
+path="res://.godot/imported/blazma-regular.otf-e4ea354eeede9206c911a6ba3e21ba63.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/blazma-regular.otf"
-dest_files=["res://.godot/imported/blazma-regular.otf-2fed7a707df439b2801443435ec91d93.fontdata"]
+source_file="res://assets/gui/fonts/blazma-regular.otf"
+dest_files=["res://.godot/imported/blazma-regular.otf-e4ea354eeede9206c911a6ba3e21ba63.fontdata"]
 
 [params]
 

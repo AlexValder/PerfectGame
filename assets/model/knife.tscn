@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsnrpyfe42lwy"]
+
+[ext_resource type="PackedScene" uid="uid://tse5v8kxalgy" path="res://assets/model/knife.fbx" id="1_nalpe"]
+[ext_resource type="Texture2D" uid="uid://djgxm08wlup01" path="res://assets/textures/knife_normal.png" id="2_5a6hj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5mg1"]
+shading_mode = 0
+specular_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_5a6hj")
+
+[node name="knife" instance=ExtResource("1_nalpe")]
+
+[node name="Meatcleaver_001" parent="RootNode" index="0"]
+cast_shadow = 0
+surface_material_override/0 = SubResource("StandardMaterial3D_q5mg1")

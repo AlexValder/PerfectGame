@@ -1,0 +1,89 @@
+[gd_scene load_steps=10 format=3 uid="uid://dnf5hi2ktnptq"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_kamoh"]
+[ext_resource type="Texture2D" uid="uid://cplx3hyxxlotq" path="res://assets/textures/house_bricks.png" id="1_x42e2"]
+[ext_resource type="Theme" path="res://assets/gui/default_theme.tres" id="2_1wjm0"]
+
+[sub_resource type="Environment" id="Environment_rlu6g"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_tvtp2"]
+load_path = "res://.godot/imported/grass_00.png-21104e1e581c9fa04af0625d66bbebe9.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_luqe3"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("CompressedTexture2D_tvtp2")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_ermsb"]
+material = SubResource("StandardMaterial3D_luqe3")
+size = Vector3(10, 0.2, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_orb8h"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_x42e2")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_3ducl"]
+material = SubResource("StandardMaterial3D_orb8h")
+size = Vector3(10, 0.2, 10)
+
+[node name="main_menu" type="Node"]
+script = ExtResource("1_kamoh")
+
+[node name="env" type="Node3D" parent="."]
+
+[node name="camera" type="Camera3D" parent="env"]
+transform = Transform3D(1, 0, 0, 0, 0.885815, 0.464038, 0, -0.464038, 0.885815, 0, 1.06497, -1.22548)
+environment = SubResource("Environment_rlu6g")
+
+[node name="ground" type="MeshInstance3D" parent="env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.935592, -4.09132)
+mesh = SubResource("BoxMesh_ermsb")
+
+[node name="wall_1" type="MeshInstance3D" parent="env"]
+transform = Transform3D(0.707107, 0.683013, 0.183013, 0, 0.258819, -0.965926, -0.707107, 0.683013, 0.183013, -2.53538, -0.935592, -4.09132)
+mesh = SubResource("BoxMesh_3ducl")
+
+[node name="wall_2" type="MeshInstance3D" parent="env"]
+transform = Transform3D(0.644217, -0.738781, -0.197956, 0, 0.258819, -0.965926, 0.764843, 0.622266, 0.166736, 1.77643, -0.935592, -4.56008)
+mesh = SubResource("BoxMesh_3ducl")
+
+[node name="omni_light_3d" type="OmniLight3D" parent="env"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.815974, 0.163467, -5.3748)
+
+[node name="gui" type="CanvasLayer" parent="."]
+
+[node name="vbox" type="VBoxContainer" parent="gui"]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.5
+offset_right = 62.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_1wjm0")
+alignment = 1
+
+[node name="play" type="Button" parent="gui/vbox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "play"
+
+[node name="options" type="Button" parent="gui/vbox"]
+unique_name_in_owner = true
+layout_mode = 2
+disabled = true
+text = "options"
+
+[node name="quit" type="Button" parent="gui/vbox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "quit"
+
+[connection signal="button_up" from="gui/vbox/play" to="." method="_on_play_button_up"]
+[connection signal="button_up" from="gui/vbox/options" to="." method="_on_options_button_up"]
+[connection signal="button_up" from="gui/vbox/quit" to="." method="_on_quit_button_up"]

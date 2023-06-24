@@ -4,7 +4,6 @@ class_name PlayerCamera
 @export var mouse_sensitivity := 0.01
 @export var joy_sensitivity := 2.0
 @onready var _arm := $arm as SpringArm3D
-@onready var _camera := $arm/camera as Camera3D
 
 const MIN_Y := -PI/2.0
 const MAX_Y := 0.0

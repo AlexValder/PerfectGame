@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://cbjtmyds32hcx"]
+
+[ext_resource type="PackedScene" uid="uid://bl0c81bqbuvqr" path="res://assets/model/house.fbx" id="1_qthfk"]
+[ext_resource type="Texture2D" uid="uid://cplx3hyxxlotq" path="res://assets/textures/house_bricks.png" id="2_1hx84"]
+[ext_resource type="Texture2D" uid="uid://sxophoih4t46" path="res://assets/textures/metal.png" id="2_8nrnw"]
+[ext_resource type="Texture2D" uid="uid://lo6k6va3c18c" path="res://assets/textures/wood.png" id="3_5l1k6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hh5jr"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_8nrnw")
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dcjes"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_5l1k6")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0yxge"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_1hx84")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_i2hyr"]
+noise_type = 0
+fractal_type = 3
+fractal_lacunarity = 7.0
+fractal_weighted_strength = 0.25
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_barlp"]
+noise = SubResource("FastNoiseLite_i2hyr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ik046"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("NoiseTexture2D_barlp")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6v0lc"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("NoiseTexture2D_barlp")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[node name="house" instance=ExtResource("1_qthfk")]
+
+[node name="base_001" parent="RootNode" index="0"]
+material_override = SubResource("StandardMaterial3D_hh5jr")
+
+[node name="handle" parent="RootNode" index="1"]
+material_override = SubResource("StandardMaterial3D_hh5jr")
+
+[node name="handle-base" parent="RootNode" index="2"]
+material_override = SubResource("StandardMaterial3D_hh5jr")
+
+[node name="roof" parent="RootNode" index="3"]
+material_override = SubResource("StandardMaterial3D_dcjes")
+
+[node name="walls" parent="RootNode" index="4"]
+material_override = SubResource("StandardMaterial3D_0yxge")
+
+[node name="window_000" parent="RootNode" index="5"]
+material_override = SubResource("StandardMaterial3D_ik046")
+
+[node name="window_001" parent="RootNode" index="6"]
+material_override = SubResource("StandardMaterial3D_6v0lc")
+
+[node name="window_002" parent="RootNode" index="7"]
+material_override = SubResource("StandardMaterial3D_6v0lc")
+
+[node name="window_003" parent="RootNode" index="8"]
+material_override = SubResource("StandardMaterial3D_6v0lc")
