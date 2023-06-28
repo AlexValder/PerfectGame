@@ -1,81 +1,78 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbjtmyds32hcx"]
+[gd_scene load_steps=16 format=3 uid="uid://dhsryc8u1vfp3"]
 
-[ext_resource type="PackedScene" uid="uid://bl0c81bqbuvqr" path="res://assets/model/house.fbx" id="1_qthfk"]
-[ext_resource type="Texture2D" uid="uid://cplx3hyxxlotq" path="res://assets/textures/house_bricks.png" id="2_1hx84"]
-[ext_resource type="Texture2D" uid="uid://sxophoih4t46" path="res://assets/textures/metal.png" id="2_8nrnw"]
-[ext_resource type="Texture2D" uid="uid://lo6k6va3c18c" path="res://assets/textures/wood.png" id="3_5l1k6"]
+[ext_resource type="PackedScene" uid="uid://vdp8rd62c3oa" path="res://assets/model/house.glb" id="1_undo1"]
+[ext_resource type="Texture2D" uid="uid://bpfmc6uofqda8" path="res://assets/textures/house_door_base.png" id="2_wflew"]
+[ext_resource type="Texture2D" uid="uid://dqjunoyenqjov" path="res://assets/textures/house_door_handle.png" id="3_j5j4o"]
+[ext_resource type="Texture2D" uid="uid://cgnrvss2cw8a7" path="res://assets/textures/house_door_handle_base.png" id="4_0v1up"]
+[ext_resource type="Texture2D" uid="uid://d1axubhqgusss" path="res://assets/textures/house_roof.png" id="5_f8l8o"]
+[ext_resource type="Texture2D" uid="uid://csbp7rvmldj1p" path="res://assets/textures/house_door_frame.png" id="5_pp77f"]
+[ext_resource type="Texture2D" uid="uid://c8tckwsdlppsx" path="res://assets/textures/house_walls.png" id="6_3udfb"]
+[ext_resource type="Texture2D" uid="uid://dt55e6ffyuxvr" path="res://assets/textures/house_window.png" id="7_nbyyb"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hh5jr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lr8ik"]
 shading_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_8nrnw")
-uv1_triplanar = true
-uv1_world_triplanar = true
-texture_filter = 5
+albedo_texture = ExtResource("2_wflew")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dcjes"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdbj2"]
 shading_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("3_5l1k6")
-uv1_triplanar = true
-uv1_world_triplanar = true
+albedo_texture = ExtResource("3_j5j4o")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0yxge"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1sye"]
 shading_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_1hx84")
-uv1_triplanar = true
-uv1_world_triplanar = true
+albedo_texture = ExtResource("4_0v1up")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_i2hyr"]
-noise_type = 0
-fractal_type = 3
-fractal_lacunarity = 7.0
-fractal_weighted_strength = 0.25
-domain_warp_enabled = true
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_barlp"]
-noise = SubResource("FastNoiseLite_i2hyr")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ik046"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggvl1"]
 shading_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = SubResource("NoiseTexture2D_barlp")
-uv1_triplanar = true
-uv1_world_triplanar = true
+albedo_texture = ExtResource("5_pp77f")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6v0lc"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqoq5"]
 shading_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = SubResource("NoiseTexture2D_barlp")
-uv1_triplanar = true
-uv1_world_triplanar = true
+albedo_texture = ExtResource("5_f8l8o")
 
-[node name="house" instance=ExtResource("1_qthfk")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c74gq"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("6_3udfb")
 
-[node name="base_001" parent="RootNode" index="0"]
-material_override = SubResource("StandardMaterial3D_hh5jr")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wwxv"]
+transparency = 4
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("7_nbyyb")
 
-[node name="handle" parent="RootNode" index="1"]
-material_override = SubResource("StandardMaterial3D_hh5jr")
+[node name="house" instance=ExtResource("1_undo1")]
 
-[node name="handle-base" parent="RootNode" index="2"]
-material_override = SubResource("StandardMaterial3D_hh5jr")
+[node name="door" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_lr8ik")
 
-[node name="roof" parent="RootNode" index="3"]
-material_override = SubResource("StandardMaterial3D_dcjes")
+[node name="handle" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fdbj2")
 
-[node name="walls" parent="RootNode" index="4"]
-material_override = SubResource("StandardMaterial3D_0yxge")
+[node name="handle-base" parent="." index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_c1sye")
 
-[node name="window_000" parent="RootNode" index="5"]
-material_override = SubResource("StandardMaterial3D_ik046")
+[node name="frame" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ggvl1")
 
-[node name="window_001" parent="RootNode" index="6"]
-material_override = SubResource("StandardMaterial3D_6v0lc")
+[node name="roof" parent="." index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_vqoq5")
 
-[node name="window_002" parent="RootNode" index="7"]
-material_override = SubResource("StandardMaterial3D_6v0lc")
+[node name="walls" parent="." index="5"]
+surface_material_override/0 = SubResource("StandardMaterial3D_c74gq")
 
-[node name="window_003" parent="RootNode" index="8"]
-material_override = SubResource("StandardMaterial3D_6v0lc")
+[node name="window_000" parent="." index="6"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2wwxv")
+
+[node name="window_001" parent="." index="7"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2wwxv")
+
+[node name="window_002" parent="." index="8"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2wwxv")
+
+[node name="window_003" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2wwxv")

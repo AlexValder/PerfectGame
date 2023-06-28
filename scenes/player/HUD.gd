@@ -23,6 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_resume_button_up() -> void:
     _panel.visible = false
+    Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
     get_tree().paused = false
 
 

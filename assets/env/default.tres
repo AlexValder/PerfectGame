@@ -2,6 +2,6 @@
 
 [resource]
 ambient_light_source = 2
-ambient_light_color = Color(0.615686, 0.901961, 0.913725, 1)
+ambient_light_color = Color(0.619608, 0.619608, 0.619608, 1)
 tonemap_mode = 2
 volumetric_fog_emission = Color(1, 1, 1, 1)
