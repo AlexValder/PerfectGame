@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbcerdyuloc17"]
+
+[ext_resource type="Script" path="res://scenes/player/gui/hud.gd" id="1_md18c"]
+[ext_resource type="Theme" path="res://assets/gui/default_theme.tres" id="2_l3buo"]
+
+[sub_resource type="GDScript" id="GDScript_sgyjg"]
+script/source = "extends Label
+
+
+func _process(_delta: float) -> void:
+    text = \"%d FPS\" % Engine.get_frames_per_second()
+"
+
+[node name="HUD" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_md18c")
+
+[node name="fps" type="Label" parent="."]
+top_level = true
+z_index = 50
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 69.0
+offset_bottom = 36.0
+theme = ExtResource("2_l3buo")
+text = "000 FPS"
+uppercase = true
+script = SubResource("GDScript_sgyjg")
+
+[node name="bg" type="PanelContainer" parent="."]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_l3buo")
+
+[node name="panel" type="PanelContainer" parent="bg"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="vbox" type="VBoxContainer" parent="bg/panel"]
+layout_mode = 2
+
+[node name="title" type="Label" parent="bg/panel/vbox"]
+layout_mode = 2
+text = "MENU"
+horizontal_alignment = 1
+
+[node name="grid" type="GridContainer" parent="bg/panel/vbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+
+[node name="resume" type="Button" parent="bg/panel/vbox/grid"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "resume"
+
+[node name="restart" type="Button" parent="bg/panel/vbox/grid"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "restart"
+
+[node name="quit" type="Button" parent="bg/panel/vbox/grid"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.639216, 0, 0, 1)
+text = "quit"
+
+[connection signal="button_up" from="bg/panel/vbox/grid/resume" to="." method="_on_resume_button_up"]
+[connection signal="button_up" from="bg/panel/vbox/grid/restart" to="." method="_on_restart_button_up"]
+[connection signal="button_up" from="bg/panel/vbox/grid/quit" to="." method="_on_quit_button_up"]

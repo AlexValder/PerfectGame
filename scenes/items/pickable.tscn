@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=3 uid="uid://o4tdr8yjo73h"]
+
+[ext_resource type="Script" path="res://scenes/items/pickable.gd" id="1_i4607"]
+[ext_resource type="FontFile" uid="uid://cd2uvmainbr1d" path="res://assets/gui/fonts/blazma-regular.otf" id="2_ckoms"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6g5rb"]
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d0ghk"]
+height = 1.0
+radius = 1.5
+
+[node name="base_item" type="Area3D"]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_i4607")
+
+[node name="shape" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_6g5rb")
+
+[node name="mesh" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="label_show" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="shape" type="CollisionShape3D" parent="label_show"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_d0ghk")
+
+[node name="label" type="Label3D" parent="label_show"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.25, 0)
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+texture_filter = 5
+render_priority = 5
+text = "test"
+font = ExtResource("2_ckoms")
+outline_size = 0
+uppercase = true

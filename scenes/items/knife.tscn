@@ -1,34 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfsermoacr5gf"]
+[gd_scene load_steps=6 format=3 uid="uid://b5o0efcwba3fb"]
 
-[ext_resource type="PackedScene" uid="uid://bk8crod3sifth" path="res://scenes/items/base_item.tscn" id="1_de7nc"]
+[ext_resource type="PackedScene" uid="uid://o4tdr8yjo73h" path="res://scenes/items/pickable.tscn" id="1_de7nc"]
 [ext_resource type="Script" path="res://scenes/items/knife.gd" id="2_a8jnv"]
-[ext_resource type="PackedScene" uid="uid://dsnrpyfe42lwy" path="res://assets/model/knife.tscn" id="2_c8w1h"]
+[ext_resource type="PackedScene" uid="uid://dsnrpyfe42lwy" path="res://assets/scenes/knife.tscn" id="2_c8w1h"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ctvbm"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kqfah"]
 height = 1.0
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_bxdph"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_6vxkf"]
 height = 1.0
 radius = 1.5
 
 [node name="knife" instance=ExtResource("1_de7nc")]
-collision_layer = 8
-collision_mask = 7
 script = ExtResource("2_a8jnv")
 title = "Knife"
+id = "knife_normal"
 
 [node name="shape" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CylinderShape3D_ctvbm")
+shape = SubResource("CylinderShape3D_kqfah")
 
 [node name="knife" parent="mesh" index="0" instance=ExtResource("2_c8w1h")]
 transform = Transform3D(0.1, 0, 0, 0, 0.0707107, 0.0707107, 0, -0.0707107, 0.0707107, 0, 0, 0.201144)
 gi_mode = 0
 
-[node name="label_show" parent="." index="2"]
-collision_layer = 0
-collision_mask = 2
-
 [node name="shape" parent="label_show" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CylinderShape3D_bxdph")
+shape = SubResource("CylinderShape3D_6vxkf")

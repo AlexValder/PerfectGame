@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://d20o6kxxjqckn"]
+[gd_scene load_steps=3 format=3 uid="uid://b051dp5pmr4yd"]
 
-[ext_resource type="Script" path="res://scenes/player/player_camera.gd" id="1_1n8m6"]
+[ext_resource type="Script" path="res://scenes/player/camera.gd" id="1_venst"]
 [ext_resource type="Environment" uid="uid://c24w8n5qcm5ig" path="res://assets/env/default.tres" id="2_xs0qa"]
 
 [node name="camera" type="Node3D"]
-script = ExtResource("1_1n8m6")
+script = ExtResource("1_venst")
 mouse_sensitivity = 0.005
 
 [node name="arm" type="SpringArm3D" parent="."]

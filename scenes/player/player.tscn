@@ -1,9 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://ba5bnn3lmdtr7"]
+[gd_scene load_steps=15 format=3 uid="uid://btclomjrxggh2"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_54437"]
-[ext_resource type="PackedScene" uid="uid://d20o6kxxjqckn" path="res://scenes/player/camera.tscn" id="2_a8qjp"]
-[ext_resource type="Script" path="res://scenes/player/HUD.gd" id="3_cc3y2"]
-[ext_resource type="Theme" path="res://assets/gui/default_theme.tres" id="3_mhjw4"]
+[ext_resource type="PackedScene" uid="uid://b051dp5pmr4yd" path="res://scenes/player/camera.tscn" id="2_a8qjp"]
+[ext_resource type="PackedScene" uid="uid://bbcerdyuloc17" path="res://scenes/player/gui/hud.tscn" id="3_70omf"]
+[ext_resource type="Script" path="res://scenes/player/state_machine/state_machine.gd" id="3_hp0jh"]
+[ext_resource type="Script" path="res://scenes/player/state_machine/idle.gd" id="4_gehqd"]
+[ext_resource type="Script" path="res://scenes/player/state_machine/walk_run.gd" id="5_6p40c"]
+[ext_resource type="Script" path="res://scenes/player/state_machine/fall.gd" id="6_1ccf3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ys1yu"]
 
@@ -25,13 +28,8 @@ rings = 2
 [sub_resource type="BoxMesh" id="BoxMesh_klwus"]
 size = Vector3(0.15, 1, 0.15)
 
-[sub_resource type="GDScript" id="GDScript_sgyjg"]
-script/source = "extends Label
-
-
-func _process(_delta: float) -> void:
-    text = \"%d FPS\" % Engine.get_frames_per_second()
-"
+[sub_resource type="BoxShape3D" id="BoxShape3D_8miqn"]
+size = Vector3(2.24735, 1.99363, 1.7231)
 
 [node name="player" type="CharacterBody3D"]
 collision_layer = 2
@@ -55,67 +53,43 @@ mesh = SubResource("CapsuleMesh_mhf18")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.4, -0.4)
 mesh = SubResource("BoxMesh_klwus")
 
-[node name="HUD" type="CanvasLayer" parent="."]
-process_mode = 3
-script = ExtResource("3_cc3y2")
+[node name="hand" type="RayCast3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393561, 0)
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 28
+debug_shape_custom_color = Color(0, 0, 1, 1)
 
-[node name="fps" type="Label" parent="HUD"]
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 69.0
-offset_bottom = 36.0
-theme = ExtResource("3_mhjw4")
-text = "000 FPS"
-uppercase = true
-script = SubResource("GDScript_sgyjg")
+[node name="grabbable" type="Area3D" parent="mesh"]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
 
-[node name="bg" type="PanelContainer" parent="HUD"]
-process_mode = 2
-anchors_preset = 15
+[node name="shape" type="CollisionShape3D" parent="mesh/grabbable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.759821)
+shape = SubResource("BoxShape3D_8miqn")
+
+[node name="state_machine" type="Node3D" parent="."]
+script = ExtResource("3_hp0jh")
+
+[node name="idle" type="Node" parent="state_machine"]
+script = ExtResource("4_gehqd")
+
+[node name="move" type="Node" parent="state_machine"]
+script = ExtResource("5_6p40c")
+
+[node name="fall" type="Node" parent="state_machine"]
+script = ExtResource("6_1ccf3")
+
+[node name="label" type="Label" parent="state_machine"]
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -26.0
 grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("3_mhjw4")
-
-[node name="panel" type="PanelContainer" parent="HUD/bg"]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="vbox" type="VBoxContainer" parent="HUD/bg/panel"]
-layout_mode = 2
-
-[node name="title" type="Label" parent="HUD/bg/panel/vbox"]
-layout_mode = 2
-text = "MENU"
+grow_vertical = 0
+text = "STATE: %s"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="grid" type="GridContainer" parent="HUD/bg/panel/vbox"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-
-[node name="resume" type="Button" parent="HUD/bg/panel/vbox/grid"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "resume"
-
-[node name="restart" type="Button" parent="HUD/bg/panel/vbox/grid"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "restart"
-
-[node name="quit" type="Button" parent="HUD/bg/panel/vbox/grid"]
-unique_name_in_owner = true
-layout_mode = 2
-theme_override_colors/font_color = Color(0.639216, 0, 0, 1)
-text = "quit"
-
-[connection signal="button_up" from="HUD/bg/panel/vbox/grid/resume" to="HUD" method="_on_resume_button_up"]
-[connection signal="button_up" from="HUD/bg/panel/vbox/grid/restart" to="HUD" method="_on_restart_button_up"]
-[connection signal="button_up" from="HUD/bg/panel/vbox/grid/quit" to="HUD" method="_on_quit_button_up"]
+[node name="HUD" parent="." instance=ExtResource("3_70omf")]

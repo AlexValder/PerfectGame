@@ -1,0 +1,273 @@
+[gd_scene load_steps=17 format=3 uid="uid://ddvdhce4jgfe0"]
+
+[ext_resource type="PackedScene" uid="uid://fv3tulcmr1df" path="res://assets/model/door.glb" id="1_f7inx"]
+[ext_resource type="Script" path="res://scenes/props/door.gd" id="2_fvsw7"]
+[ext_resource type="Texture2D" uid="uid://bpfmc6uofqda8" path="res://assets/textures/house_door_base.png" id="2_ydolw"]
+[ext_resource type="Texture2D" uid="uid://dqjunoyenqjov" path="res://assets/textures/house_door_handle.png" id="3_au1ab"]
+[ext_resource type="Texture2D" uid="uid://cgnrvss2cw8a7" path="res://assets/textures/house_door_handle_base.png" id="4_3cwnj"]
+[ext_resource type="Texture2D" uid="uid://csbp7rvmldj1p" path="res://assets/textures/house_door_frame.png" id="5_nno0a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wincr"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("5_nno0a")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gon3o"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_ydolw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7o477"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_3cwnj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iejh4"]
+shading_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_au1ab")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yjuvk"]
+size = Vector3(0.084831, 1.96487, 1.11645)
+
+[sub_resource type="Animation" id="Animation_ty6uu"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("frame/door2/handle-base/handle:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("frame/door2/handle-base/handle:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("frame/door2/handle-base/handle:rotation:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-1.5708, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("frame/door2:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("frame/door2/anim_body:rotation:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("frame/door2/anim_body:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6xtye"]
+_data = {
+"RESET": SubResource("Animation_ty6uu")
+}
+
+[sub_resource type="Animation" id="Animation_hr58i"]
+resource_name = "open_outside"
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("frame/door2:rotation_degrees:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0, -0.05, 0, 0.6, 4, -94, -0.2, -10, 0, 39),
+"times": PackedFloat32Array(0, 0.25, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("frame/door2/handle-base/handle:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.00238562, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.25, 0.55, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("frame/door2/handle-base/handle:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.619326, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.25, 0.55, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("frame/door2/handle-base/handle:rotation:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-1.5708, -0.25, 0, 0.25, 0, -1.57825, -0.25, 0, 0.25, 0, -1.5708, -0.25, 0, 0.25, 0, -1.5708, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.25, 0.55, 1)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("frame/door2/anim_body:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ttu4e"]
+resource_name = "open_outside"
+step = 0.05
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("frame/door2:rotation_degrees:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 0, -0.05, 0, 0.6, -4, 94, -0.2, 10, 0, -39),
+"times": PackedFloat32Array(0, 0.25, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("frame/door2/handle-base/handle:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.00238562, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.25, 0.55, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("frame/door2/handle-base/handle:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.619326, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.25, 0.55, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("frame/door2/handle-base/handle:rotation:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(-1.5708, -0.25, 0, 0.25, 0, -1.57825, -0.25, 0, 0.25, 0, -1.5708, -0.25, 0, 0.25, 0, -1.5708, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.25, 0.55, 1)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("frame/door2/anim_body:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qwtp5"]
+_data = {
+"open_inside": SubResource("Animation_hr58i"),
+"open_outside": SubResource("Animation_ttu4e")
+}
+
+[node name="door" instance=ExtResource("1_f7inx")]
+script = ExtResource("2_fvsw7")
+
+[node name="frame" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_wincr")
+
+[node name="door2" parent="frame" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000601649, -0.56)
+surface_material_override/0 = SubResource("StandardMaterial3D_gon3o")
+
+[node name="handle-base" parent="frame/door2" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7o477")
+
+[node name="handle" parent="frame/door2/handle-base" index="0"]
+transform = Transform3D(-3.61999e-06, 1, 0, -1, -3.61999e-06, 0, 0, 0, 1, 0.00571775, -0.0349236, 0.00139365)
+surface_material_override/0 = SubResource("StandardMaterial3D_iejh4")
+
+[node name="anim_body" type="AnimatableBody3D" parent="frame/door2" index="1"]
+collision_layer = 17
+collision_mask = 31
+sync_to_physics = false
+
+[node name="shape" type="CollisionShape3D" parent="frame/door2/anim_body" index="0"]
+transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0.56)
+shape = SubResource("BoxShape3D_yjuvk")
+
+[node name="timer" type="Timer" parent="." index="1"]
+wait_time = 3.0
+one_shot = true
+
+[node name="anim_player" type="AnimationPlayer" parent="." index="2"]
+autoplay = "door/RESET"
+playback_process_mode = 0
+libraries = {
+"": SubResource("AnimationLibrary_6xtye"),
+"door": SubResource("AnimationLibrary_qwtp5")
+}
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]

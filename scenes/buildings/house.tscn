@@ -1,33 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://dhsryc8u1vfp3"]
+[gd_scene load_steps=11 format=3 uid="uid://dhsryc8u1vfp3"]
 
 [ext_resource type="PackedScene" uid="uid://vdp8rd62c3oa" path="res://assets/model/house.glb" id="1_undo1"]
-[ext_resource type="Texture2D" uid="uid://bpfmc6uofqda8" path="res://assets/textures/house_door_base.png" id="2_wflew"]
-[ext_resource type="Texture2D" uid="uid://dqjunoyenqjov" path="res://assets/textures/house_door_handle.png" id="3_j5j4o"]
-[ext_resource type="Texture2D" uid="uid://cgnrvss2cw8a7" path="res://assets/textures/house_door_handle_base.png" id="4_0v1up"]
+[ext_resource type="Script" path="res://scenes/buildings/house.gd" id="2_00vke"]
 [ext_resource type="Texture2D" uid="uid://d1axubhqgusss" path="res://assets/textures/house_roof.png" id="5_f8l8o"]
-[ext_resource type="Texture2D" uid="uid://csbp7rvmldj1p" path="res://assets/textures/house_door_frame.png" id="5_pp77f"]
 [ext_resource type="Texture2D" uid="uid://c8tckwsdlppsx" path="res://assets/textures/house_walls.png" id="6_3udfb"]
 [ext_resource type="Texture2D" uid="uid://dt55e6ffyuxvr" path="res://assets/textures/house_window.png" id="7_nbyyb"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lr8ik"]
-shading_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_wflew")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdbj2"]
-shading_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("3_j5j4o")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c1sye"]
-shading_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("4_0v1up")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ggvl1"]
-shading_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("5_pp77f")
+[sub_resource type="BoxShape3D" id="BoxShape3D_nkcj4"]
+size = Vector3(9.9, 3, 9.9)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vqoq5"]
 shading_mode = 2
@@ -39,6 +19,9 @@ shading_mode = 2
 vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("6_3udfb")
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_y4uld"]
+data = PackedVector3Array(4.7131, 0, -4.7, -4.6869, 0, 4.7, -4.6869, 0, -4.7, -4.9999, 2.9745, 5, 4.6869, 2.999, 4.7, 5, 3.0255, 5, -5, 2.9745, -5, -4.7131, 2.999, 4.7, -4.9999, 2.9745, 5, 5, 0.0255, 5, -4.9888, -0.326, 5, -4.9999, -0.0255, 5, 5.0111, -0.275, -5, 5, 0.0255, 5, 4.9999, 0.0255, -5, -4.7045, 2.0125, -3.1979, -4.6869, 0, -4.7, -4.6872, 0, -3.1979, -4.6872, 0, -2.0796, -4.6869, 0, 4.7, -4.7045, 2.0125, -2.0796, 4.6869, 2.999, -4.7, -4.6869, 0, -4.7, -4.7132, 2.999, -4.7, 4.6869, 2.999, -4.7, 4.7131, 0, 4.7, 4.7131, 0, -4.7, 4.6869, 2.999, 4.7, -4.6869, 0, 4.7, 4.7131, 0, 4.7, -4.9999, -0.0255, 5, -4.9889, -0.326, -5, -5, -0.0255, -5, 4.6869, 2.999, -4.7, -5, 2.9745, -5, 4.9999, 3.0255, -5, -4.9889, -0.326, -5, 4.9999, 0.0255, -5, -5, -0.0255, -5, 5, 3.0255, 5, 4.6869, 2.999, -4.7, 4.9999, 3.0255, -5, -5, 2.0125, -3.1979, -5, -0.0255, -5, -5, 2.9745, -5, -5, 2.0125, -2.0796, -4.9999, -0.0255, 5, -5, 0, -2.0796, 5, 0.0255, 5, -4.9999, 2.9745, 5, 5, 3.0255, 5, 4.9999, 3.0255, -5, 5, 0.0255, 5, 5, 3.0255, 5, 4.9999, 0.0255, -5, -5, 2.9745, -5, -5, -0.0255, -5, -4.6757, -0.2995, 4.7, -4.9889, -0.326, -5, -4.9888, -0.326, 5, -4.6758, -0.2995, -4.7, 5.0111, -0.275, -5, -4.9889, -0.326, -5, -4.6757, -0.2995, 4.7, 4.7243, -0.2995, -4.7, -4.6758, -0.2995, -4.7, 4.7243, -0.2995, -4.7, 5.0112, -0.275, 5, 5.0111, -0.275, -5, 5.0112, -0.275, 5, -4.6757, -0.2995, 4.7, -4.9888, -0.326, 5, -4.7045, 2.0125, -3.1979, -5, 0, -3.1979, -5, 2.0125, -3.1979, -5, 0, -2.0796, -4.7045, 2.0125, -2.0796, -5, 2.0125, -2.0796, -5, 0, -2.0796, -4.6872, 0, -3.1979, -4.6872, 0, -2.0796, -4.7045, 2.0125, -3.1979, -5, 2.0125, -2.0796, -4.7045, 2.0125, -2.0796, -4.7131, 2.999, 4.7, 4.6869, 2.999, -4.7, 4.6869, 2.999, 4.7, 4.7131, 0, 4.7, -4.6869, 0, 4.7, 4.7131, 0, -4.7, -4.7131, 2.999, 4.7, 4.6869, 2.999, 4.7, -4.9999, 2.9745, 5, -4.7132, 2.999, -4.7, -4.7131, 2.999, 4.7, -5, 2.9745, -5, 5.0112, -0.275, 5, -4.9888, -0.326, 5, 5, 0.0255, 5, 5.0112, -0.275, 5, 5, 0.0255, 5, 5.0111, -0.275, -5, -4.7132, 2.999, -4.7, -4.6869, 0, -4.7, -4.7045, 2.0125, -3.1979, -4.7045, 2.0125, -3.1979, -4.7045, 2.0125, -2.0796, -4.7132, 2.999, -4.7, -4.7131, 2.999, 4.7, -4.7132, 2.999, -4.7, -4.6869, 0, 4.7, -4.6869, 0, -4.7, -4.6869, 0, 4.7, -4.6872, 0, -3.1979, -4.6872, 0, -3.1979, -4.6869, 0, 4.7, -4.6872, 0, -2.0796, -4.7132, 2.999, -4.7, -4.7045, 2.0125, -2.0796, -4.6869, 0, 4.7, 4.7131, 0, -4.7, -4.6869, 0, -4.7, 4.6869, 2.999, -4.7, 4.6869, 2.999, 4.7, 4.7131, 0, 4.7, 4.6869, 2.999, -4.7, -4.7131, 2.999, 4.7, -4.6869, 0, 4.7, 4.6869, 2.999, 4.7, -4.9888, -0.326, 5, -4.9889, -0.326, -5, -4.9999, -0.0255, 5, -4.7132, 2.999, -4.7, -5, 2.9745, -5, 4.6869, 2.999, -4.7, 5.0111, -0.275, -5, 4.9999, 0.0255, -5, -4.9889, -0.326, -5, 4.6869, 2.999, 4.7, 4.6869, 2.999, -4.7, 5, 3.0255, 5, -5, 0, -3.1979, -5, -0.0255, -5, -5, 2.0125, -3.1979, -5, -0.0255, -5, -5, 0, -3.1979, -4.9999, -0.0255, 5, -4.9999, 2.9745, 5, -4.9999, -0.0255, 5, -5, 2.9745, -5, -5, 2.0125, -3.1979, -5, 2.9745, -5, -5, 2.0125, -2.0796, -5, 0, -3.1979, -5, 0, -2.0796, -4.9999, -0.0255, 5, -5, 2.9745, -5, -4.9999, -0.0255, 5, -5, 2.0125, -2.0796, -4.9999, -0.0255, 5, -4.9999, 2.9745, 5, 5, 0.0255, 5, 4.9999, 0.0255, -5, 5, 0.0255, 5, 4.9999, 3.0255, -5, 4.9999, 3.0255, -5, -5, 2.9745, -5, 4.9999, 0.0255, -5, -4.6758, -0.2995, -4.7, -4.9889, -0.326, -5, -4.6757, -0.2995, 4.7, 4.7243, -0.2995, -4.7, 5.0111, -0.275, -5, -4.6758, -0.2995, -4.7, 4.7243, -0.2995, 4.7, 4.7243, -0.2995, -4.7, -4.6757, -0.2995, 4.7, 4.7243, -0.2995, 4.7, 5.0112, -0.275, 5, 4.7243, -0.2995, -4.7, 4.7243, -0.2995, 4.7, -4.6757, -0.2995, 4.7, 5.0112, -0.275, 5, -4.6872, 0, -3.1979, -5, 0, -3.1979, -4.7045, 2.0125, -3.1979, -4.6872, 0, -2.0796, -4.7045, 2.0125, -2.0796, -5, 0, -2.0796, -5, 0, -3.1979, -4.6872, 0, -3.1979, -5, 0, -2.0796, -5, 2.0125, -3.1979, -5, 2.0125, -2.0796, -4.7045, 2.0125, -3.1979, -4.7132, 2.999, -4.7, 4.6869, 2.999, -4.7, -4.7131, 2.999, 4.7)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2wwxv"]
 transparency = 4
 shading_mode = 2
@@ -46,33 +29,39 @@ vertex_color_use_as_albedo = true
 albedo_texture = ExtResource("7_nbyyb")
 
 [node name="house" instance=ExtResource("1_undo1")]
+script = ExtResource("2_00vke")
 
-[node name="door" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_lr8ik")
+[node name="area" type="Area3D" parent="." index="0"]
+collision_layer = 0
+collision_mask = 2
 
-[node name="handle" parent="." index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_fdbj2")
+[node name="shape" type="CollisionShape3D" parent="area" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_nkcj4")
 
-[node name="handle-base" parent="." index="2"]
-surface_material_override/0 = SubResource("StandardMaterial3D_c1sye")
-
-[node name="frame" parent="." index="3"]
-surface_material_override/0 = SubResource("StandardMaterial3D_ggvl1")
-
-[node name="roof" parent="." index="4"]
+[node name="roof" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_vqoq5")
 
-[node name="walls" parent="." index="5"]
+[node name="walls" parent="." index="2"]
 surface_material_override/0 = SubResource("StandardMaterial3D_c74gq")
 
-[node name="window_000" parent="." index="6"]
+[node name="static_body" type="StaticBody3D" parent="walls" index="0"]
+collision_mask = 15
+
+[node name="shape" type="CollisionShape3D" parent="walls/static_body" index="0"]
+shape = SubResource("ConcavePolygonShape3D_y4uld")
+
+[node name="window_000" parent="." index="3"]
 surface_material_override/0 = SubResource("StandardMaterial3D_2wwxv")
 
-[node name="window_001" parent="." index="7"]
+[node name="window_001" parent="." index="4"]
 surface_material_override/0 = SubResource("StandardMaterial3D_2wwxv")
 
-[node name="window_002" parent="." index="8"]
+[node name="window_002" parent="." index="5"]
 surface_material_override/0 = SubResource("StandardMaterial3D_2wwxv")
 
-[node name="window_003" parent="." index="9"]
+[node name="window_003" parent="." index="6"]
 surface_material_override/0 = SubResource("StandardMaterial3D_2wwxv")
+
+[connection signal="body_entered" from="area" to="." method="_on_player_entered" flags=18]
+[connection signal="body_exited" from="area" to="." method="_on_player_exited" flags=18]
