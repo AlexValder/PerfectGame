@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://ddvdhce4jgfe0"]
+[gd_scene load_steps=18 format=3 uid="uid://ddvdhce4jgfe0"]
 
 [ext_resource type="PackedScene" uid="uid://fv3tulcmr1df" path="res://assets/model/door.glb" id="1_f7inx"]
 [ext_resource type="Script" path="res://scenes/props/door.gd" id="2_fvsw7"]
 [ext_resource type="Texture2D" uid="uid://bpfmc6uofqda8" path="res://assets/textures/house_door_base.png" id="2_ydolw"]
+[ext_resource type="FontFile" uid="uid://cd2uvmainbr1d" path="res://assets/gui/fonts/blazma-regular.otf" id="3_0dfa2"]
 [ext_resource type="Texture2D" uid="uid://dqjunoyenqjov" path="res://assets/textures/house_door_handle.png" id="3_au1ab"]
 [ext_resource type="Texture2D" uid="uid://cgnrvss2cw8a7" path="res://assets/textures/house_door_handle_base.png" id="4_3cwnj"]
 [ext_resource type="Texture2D" uid="uid://csbp7rvmldj1p" path="res://assets/textures/house_door_frame.png" id="5_nno0a"]
@@ -235,7 +236,24 @@ _data = {
 [node name="door" instance=ExtResource("1_f7inx")]
 script = ExtResource("2_fvsw7")
 
-[node name="frame" parent="." index="0"]
+[node name="message" type="Label3D" parent="." index="0"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1.55456, 0)
+billboard = 1
+double_sided = false
+no_depth_test = true
+fixed_size = true
+texture_filter = 5
+render_priority = 5
+outline_render_priority = 1
+text = "door message"
+font = ExtResource("3_0dfa2")
+uppercase = true
+
+[node name="message_timer" type="Timer" parent="message" index="0"]
+wait_time = 1.5
+one_shot = true
+
+[node name="frame" parent="." index="1"]
 surface_material_override/0 = SubResource("StandardMaterial3D_wincr")
 
 [node name="door2" parent="frame" index="0"]
@@ -258,11 +276,11 @@ sync_to_physics = false
 transform = Transform3D(0.999999, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 0, 0.56)
 shape = SubResource("BoxShape3D_yjuvk")
 
-[node name="timer" type="Timer" parent="." index="1"]
+[node name="timer" type="Timer" parent="." index="2"]
 wait_time = 3.0
 one_shot = true
 
-[node name="anim_player" type="AnimationPlayer" parent="." index="2"]
+[node name="anim_player" type="AnimationPlayer" parent="." index="3"]
 autoplay = "door/RESET"
 playback_process_mode = 0
 libraries = {
@@ -270,4 +288,5 @@ libraries = {
 "door": SubResource("AnimationLibrary_qwtp5")
 }
 
+[connection signal="timeout" from="message/message_timer" to="." method="_on_message_timer_timeout"]
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]

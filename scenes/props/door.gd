@@ -3,21 +3,16 @@ class_name Door
 
 @export var house_path: NodePath
 ## Leave empty if doesn't require a key
-@export var key_name: String
+@export var key_id: String
 
 @onready var _anim := $anim_player as AnimationPlayer
+@onready var _label := $message as Label3D
+@onready var _label_timer := $message/message_timer as Timer
 @onready var _timer := $timer as Timer
+var _key_name := ""
 var _house: House
 var _opened := false
 var _requires_key := false
-
-
-func _ready() -> void:
-    var house := get_node(house_path)
-    assert(house is House)
-    _house = house
-
-    _requires_key = !key_name.is_empty()
 
 
 func open(player: Player) -> void:
@@ -50,11 +45,26 @@ func close() -> void:
     tween.play()
 
 
+func _ready() -> void:
+    var house := get_node(house_path)
+    assert(house is House)
+    _house = house
+
+    _requires_key = !key_id.is_empty()
+    if _requires_key:
+        _key_name = DataBase.get_item_info(key_id).name
+
+    _label.modulate.a = 0
+    _label.outline_modulate.a = 0
+
+
 func _can_open(player: Player) -> bool:
-    if !player.has_item(key_name):
+    if player.inventory.get_active_item() != key_id:
+        _spawn_label("Required: %s" % _key_name, Color.RED)
         return false
 
-    player.remove_item(key_name)
+    _spawn_label("Unlocked with: %s" % _key_name, Color.YELLOW)
+    player.inventory.remove_item(key_id)
     _requires_key = false
     return true
 
@@ -65,3 +75,20 @@ func _start_timer() -> void:
 
 func _on_timer_timeout() -> void:
     close()
+
+
+func _spawn_label(text: String, color: Color) -> void:
+    if _label_timer.time_left > 0:
+        _label_timer.stop()
+
+    _label.text = text
+    _label.modulate = color
+    _label.outline_modulate.a = 1
+    _label_timer.start()
+
+
+func _on_message_timer_timeout() -> void:
+    var tween := create_tween()
+    tween.tween_property(_label, "modulate:a", 0, 0.5)
+    tween.parallel().tween_property(_label, "outline_modulate:a", 0, 0.5)
+    tween.play()

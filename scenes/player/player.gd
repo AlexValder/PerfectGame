@@ -1,38 +1,40 @@
 extends CharacterBody3D
 class_name Player
 
+signal active_item_change(id, item)
+
 @onready var camera := $camera as PlayerCamera
-@onready var mesh := $mesh as MeshInstance3D
 @onready var hand := $mesh/hand as RayCast3D
+@onready var inventory := $inventory as Inventory
 @onready var reach := $mesh/grabbable as Area3D
+@onready var _mesh := $mesh as MeshInstance3D
+@onready var _shape := $shape as CollisionShape3D
 
 const SPEED := 250.0
 const WALK_SPEED := 120.0
 const RUN_WALK_THRESHOLD := 0.5
 
-const GRAVITY := 98.0
+const GRAVITY := 98.0 / 2
 const ANGLE_ACC := 10.0
 
-var _inv := []
 
-
-func add_item(id: String) -> void:
-    _inv.push_back(id)
-
-
-func has_item(id: String) -> bool:
-    return _inv.has(id)
-
-
-func remove_item(id: String) -> void:
-    var ind := _inv.find(id)
-    if ind >= 0:
-        _inv.remove_at(ind)
+func rotate_player(angle: float, delta: float) -> void:
+    _mesh.rotation.y = lerp_angle(
+        _mesh.rotation.y, angle, delta * Player.ANGLE_ACC)
+    _shape.rotation.y = lerp_angle(
+        _shape.rotation.y, angle, delta * Player.ANGLE_ACC)
 
 
 func _unhandled_input(event: InputEvent) -> void:
     if event.is_action_pressed("action"):
         _try_action()
+        get_tree().root.set_input_as_handled()
+    elif event.is_action_pressed("next_item"):
+        inventory.next_item()
+        get_tree().root.set_input_as_handled()
+    elif event.is_action_pressed("prev_item"):
+        inventory.prev_item()
+        get_tree().root.set_input_as_handled()
 
 
 func _try_action() -> void:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://btclomjrxggh2"]
+[gd_scene load_steps=16 format=3 uid="uid://btclomjrxggh2"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_54437"]
 [ext_resource type="PackedScene" uid="uid://b051dp5pmr4yd" path="res://scenes/player/camera.tscn" id="2_a8qjp"]
+[ext_resource type="PackedScene" uid="uid://blu2d2epvotrl" path="res://scenes/player/inventory.tscn" id="2_qbd05"]
 [ext_resource type="PackedScene" uid="uid://bbcerdyuloc17" path="res://scenes/player/gui/hud.tscn" id="3_70omf"]
 [ext_resource type="Script" path="res://scenes/player/state_machine/state_machine.gd" id="3_hp0jh"]
 [ext_resource type="Script" path="res://scenes/player/state_machine/idle.gd" id="4_gehqd"]
@@ -37,6 +38,8 @@ collision_mask = 15
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_54437")
+
+[node name="inventory" parent="." instance=ExtResource("2_qbd05")]
 
 [node name="camera" parent="." instance=ExtResource("2_a8qjp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29527, 0)

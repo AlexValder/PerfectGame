@@ -15,7 +15,7 @@ func body_fits(body: Node3D) -> bool:
 
 
 func on_entered(player: Player) -> void:
-    player.add_item(id)
+    player.inventory.add_item(id)
 
 
 func on_exited(_player: Player) -> void:
@@ -28,6 +28,10 @@ func should_destroy(_player: Player) -> bool:
 
 func start_destroy() -> void:
     var timer := get_tree().create_timer(2.0)
+    var tween := create_tween()
+    tween.tween_property(_label, "modulate:a", 0, 0.5)
+    tween.play()
+
     _mesh.visible = false
     body_entered.disconnect(_on_body_entered)
     body_exited.disconnect(_on_body_exited)
@@ -42,7 +46,7 @@ func start_reject() -> void:
 
 func _ready() -> void:
     _label.text = title
-    _label.visible = false
+    _label.modulate.a = 0
 
     body_entered.connect(_on_body_entered)
     body_exited.connect(_on_body_exited)
@@ -73,8 +77,10 @@ func _on_body_exited(body: Node3D) -> void:
 
 
 func _on_label_area_entered(_body: Node3D) -> void:
-    _label.visible = true
+    _label.modulate.a = 1
 
 
 func _on_label_area_exited(_body: Node3D) -> void:
-    _label.visible = false
+    var tween := create_tween()
+    tween.tween_property(_label, "modulate:a", 0, 0.5)
+    tween.play()

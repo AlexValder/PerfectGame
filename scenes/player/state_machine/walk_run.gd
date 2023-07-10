@@ -15,8 +15,7 @@ func physics_process(delta: float) -> void:
 
     if velocity.length() > 0:
         var look_dir := -Vector2(velocity.z, velocity.x)
-        player.mesh.rotation.y = lerp_angle(
-            player.mesh.rotation.y, look_dir.angle(), delta * Player.ANGLE_ACC)
+        player.rotate_player(look_dir.angle(), delta)
     else:
         state_change.emit(self.name, "idle")
 

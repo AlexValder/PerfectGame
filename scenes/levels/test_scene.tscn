@@ -89,6 +89,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.9913, 0, 5.10182)
 [node name="key" parent="level/items" instance=ExtResource("2_sy0ms")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.383, 0, 8.06769)
 
+[node name="key_2" parent="level/items" instance=ExtResource("2_sy0ms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.383, 0, 4.13518)
+id = "key_test_2"
+
+[node name="key_3" parent="level/items" instance=ExtResource("2_sy0ms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.383, 0, -0.0307865)
+id = "key_test_3"
+
+[node name="key_4" parent="level/items" instance=ExtResource("2_sy0ms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0477, -3.8147e-06, -3.43322)
+id = "key_test_4"
+
 [node name="floor" type="MeshInstance3D" parent="level"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_2geod")
@@ -166,7 +178,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4442, 0, 4.24755)
 [node name="door" parent="level/house" instance=ExtResource("7_ycqn6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.93327, 0, -2.63499)
 house_path = NodePath("..")
-key_name = "key_test"
+key_id = "key_test"
 
 [node name="player" parent="." instance=ExtResource("4_vu6fj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.08712, 0.120356, 4.16833)

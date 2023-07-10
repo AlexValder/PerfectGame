@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://blu2d2epvotrl"]
+
+[ext_resource type="Script" path="res://scenes/player/inventory.gd" id="1_dunt7"]
+[ext_resource type="FontFile" uid="uid://cd2uvmainbr1d" path="res://assets/gui/fonts/blazma-regular.otf" id="2_vclwr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nausd"]
+font = ExtResource("2_vclwr")
+font_size = 32
+font_color = Color(0.517647, 0.517647, 0.517647, 0.517647)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mmiyk"]
+font = ExtResource("2_vclwr")
+font_size = 32
+font_color = Color(0.756863, 0.756863, 0.756863, 0.756863)
+
+[sub_resource type="LabelSettings" id="LabelSettings_btyto"]
+font = ExtResource("2_vclwr")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_sjpt5"]
+font = ExtResource("2_vclwr")
+font_size = 32
+font_color = Color(0.517647, 0.517647, 0.517647, 0.517647)
+
+[node name="inventory" type="CanvasLayer"]
+script = ExtResource("1_dunt7")
+
+[node name="hbox" type="HBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 20
+
+[node name="item_0" type="Label" parent="hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "item 0"
+label_settings = SubResource("LabelSettings_nausd")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="item_1" type="Label" parent="hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "item 1"
+label_settings = SubResource("LabelSettings_mmiyk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="item_2" type="Label" parent="hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "item 2"
+label_settings = SubResource("LabelSettings_btyto")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="item_3" type="Label" parent="hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "item 3
+"
+label_settings = SubResource("LabelSettings_mmiyk")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="item_4" type="Label" parent="hbox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "item 4
+"
+label_settings = SubResource("LabelSettings_sjpt5")
+horizontal_alignment = 1
+vertical_alignment = 1
