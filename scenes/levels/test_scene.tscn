@@ -101,6 +101,14 @@ id = "key_test_3"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.0477, -3.8147e-06, -3.43322)
 id = "key_test_4"
 
+[node name="key_5" parent="level/items" instance=ExtResource("2_sy0ms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.68803, -3.8147e-06, -7.03155)
+id = "key_test_5"
+
+[node name="key_6" parent="level/items" instance=ExtResource("2_sy0ms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75372, -3.8147e-06, -7.03155)
+id = "key_test_6"
+
 [node name="floor" type="MeshInstance3D" parent="level"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_2geod")

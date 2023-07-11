@@ -18,6 +18,12 @@ const DB := {
         "key_test_4": {
             "name": "Useless Key",
         },
+        "key_test_5": {
+            "name": "Key1",
+        },
+        "key_test_6": {
+            "name": "Key2",
+        },
     },
 }
 

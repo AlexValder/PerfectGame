@@ -1,10 +1,6 @@
 extends CanvasLayer
 class_name Inventory
 
-const ALPHA_3 := 0.50
-const ALPHA_2 := 0.75
-const ALPHA_1 := 1.00
-
 @onready var _items := [
     $hbox/item_0 as Label,
     $hbox/item_1 as Label,
@@ -75,21 +71,11 @@ func _ready() -> void:
 
 func _update_active_item() -> void:
     var size := _inv.size()
+    const i_size := 5
 
-    _items[0].visible = size > 3
-    _items[0].text = _get_name(_active_item - 2)
-
-    _items[1].visible = size > 4
-    _items[1].text = _get_name(_active_item - 1)
-
-    _items[2].visible = true
-    _items[2].text = _get_name(_active_item)
-
-    _items[3].visible = size > 1
-    _items[3].text = _get_name(_active_item + 1)
-
-    _items[4].visible = size > 2
-    _items[4].text = _get_name(_active_item + 2)
+    for i in i_size:
+        _items[i].visible = size > wrapi(i + 3, 0, 5)
+        _items[i].text = _get_name(_active_item + i - 2)
 
 
 func _get_name(index: int) -> String:
