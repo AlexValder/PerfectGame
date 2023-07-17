@@ -6,6 +6,7 @@ signal active_item_change(id, item)
 @onready var camera := $camera as PlayerCamera
 @onready var inventory := $inventory as Inventory
 @onready var reach := $mesh/grabbable as Area3D
+@onready var hand := $%hand as RayCast3D
 @onready var _mesh := $mesh as MeshInstance3D
 @onready var _shape := $shape as CollisionShape3D
 
@@ -48,10 +49,10 @@ func _try_action() -> void:
 
 
 func _use_hand() -> bool:
-    if !camera.hand.is_colliding():
+    if !hand.is_colliding():
         return false
 
-    var collider := camera.hand.get_collider()
+    var collider := hand.get_collider()
 
     var door := collider.owner as Door
     if door != null:

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_54437"]
 [ext_resource type="PackedScene" uid="uid://b051dp5pmr4yd" path="res://scenes/player/camera.tscn" id="2_a8qjp"]
-[ext_resource type="PackedScene" uid="uid://blu2d2epvotrl" path="res://scenes/player/inventory.tscn" id="2_qbd05"]
+[ext_resource type="PackedScene" uid="uid://blu2d2epvotrl" path="res://scenes/player/gui/inventory.tscn" id="2_qbd05"]
 [ext_resource type="PackedScene" uid="uid://bbcerdyuloc17" path="res://scenes/player/gui/hud.tscn" id="3_70omf"]
 [ext_resource type="Script" path="res://scenes/player/state_machine/state_machine.gd" id="3_hp0jh"]
 [ext_resource type="Script" path="res://scenes/player/state_machine/idle.gd" id="4_gehqd"]
@@ -55,6 +55,13 @@ shape = SubResource("CapsuleShape3D_ys1yu")
 [node name="mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 mesh = SubResource("CapsuleMesh_mhf18")
+
+[node name="hand" type="RayCast3D" parent="mesh"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.535, 0)
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 28
+debug_shape_custom_color = Color(0, 0, 1, 1)
 
 [node name="arm" type="MeshInstance3D" parent="mesh"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.4, -0.4)

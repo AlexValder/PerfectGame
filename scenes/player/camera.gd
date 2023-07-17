@@ -9,7 +9,6 @@ const FPV_MAX := 5 * PI / 12.0
 @export var mouse_sensitivity := 0.01
 @export var joy_sensitivity := 2.0
 @export var player_model: Node3D
-@onready var hand := $fpv_camera/hand as RayCast3D
 @onready var _arm := $arm as SpringArm3D
 @onready var _3rd_camera := $arm/camera as Camera3D
 @onready var _1st_camera := $fpv_camera as Camera3D
@@ -36,31 +35,37 @@ func get_angle() -> float:
     return _arm.rotation.y if !is_fpv else _1st_camera.rotation.y
 
 
+func get_camera_rotation() -> Vector3:
+    return _arm.rotation if !is_fpv else _1st_camera.rotation
+
+
 func rotate_fpv(angle: float, delta: float) -> void:
     _1st_camera.rotation.y = lerp_angle(
-            _1st_camera.rotation.y, _1st_camera.rotation.y + angle, delta)
+        _1st_camera.rotation.y, _1st_camera.rotation.y + angle, delta)
 
 
 func rotate_camera_joy(input: Vector2, delta: float) -> void:
     if is_fpv:
         _1st_camera.rotation.x = clampf(_1st_camera.rotation.x +\
             input.y * joy_sensitivity * delta, FPV_MIN, FPV_MAX)
-        _1st_camera.rotation.y = lerp_angle(_1st_camera.rotation.y,
-            _1st_camera.rotation.y + input.x * joy_sensitivity * delta, 1.0)
-    else:
-        _arm.rotation.x = clampf(_arm.rotation.x -\
-            input.y * joy_sensitivity * delta, MIN_Y, MAX_Y)
-        _arm.rotation.y = lerp_angle(_arm.rotation.y, _arm.rotation.y +\
-            input.x * joy_sensitivity * delta, 1.0)
+
+    _1st_camera.rotation.y = lerp_angle(_1st_camera.rotation.y,
+        _1st_camera.rotation.y + input.x * joy_sensitivity * delta, 1.0)
+
+    _arm.rotation.x = clampf(_arm.rotation.x -\
+        input.y * joy_sensitivity * delta, MIN_Y, MAX_Y)
+    _arm.rotation.y = lerp_angle(_arm.rotation.y, _arm.rotation.y +\
+        input.x * joy_sensitivity * delta, 1.0)
 
 
 func rotate_camera_mouse(input: Vector2) -> void:
     if is_fpv:
         _1st_camera.rotation.x = clampf(_1st_camera.rotation.x -\
-                input.y * mouse_sensitivity, FPV_MIN, FPV_MAX)
-        _1st_camera.rotation.y = lerp_angle(_1st_camera.rotation.y,
-            _1st_camera.rotation.y - input.x * mouse_sensitivity, 0.4)
-    else:
-        _arm.rotation.y -= input.x * mouse_sensitivity
-        _arm.rotation.x = clampf(
-            _arm.rotation.x - input.y * mouse_sensitivity, MIN_Y, MAX_Y)
+            input.y * mouse_sensitivity, FPV_MIN, FPV_MAX)
+
+    _1st_camera.rotation.y = lerp_angle(_1st_camera.rotation.y,
+        _1st_camera.rotation.y - input.x * mouse_sensitivity, 0.4)
+
+    _arm.rotation.y -= input.x * mouse_sensitivity
+    _arm.rotation.x = clampf(
+        _arm.rotation.x - input.y * mouse_sensitivity, MIN_Y, MAX_Y)

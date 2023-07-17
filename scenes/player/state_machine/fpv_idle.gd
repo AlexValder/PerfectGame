@@ -16,6 +16,9 @@ func physics_process(delta: float) -> void:
         player.camera.rotate_camera_joy(input, delta)
         player.rotate_player()
 
+        var rot := player.camera.get_camera_rotation()
+        player.hand.rotation.x = rot.x
+
     player.move_and_slide()
 
 
@@ -26,3 +29,10 @@ func unhandled_input(event: InputEvent) -> void:
 
     if event is InputEventMouseMotion:
         player.rotate_player()
+
+        var rot := player.camera.get_camera_rotation()
+        player.hand.rotation.x = rot.x
+
+
+func on_leave() -> void:
+    player.hand.rotation.x = 0
