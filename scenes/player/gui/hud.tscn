@@ -18,6 +18,8 @@ script = ExtResource("1_md18c")
 
 [node name="fps" type="Label" parent="."]
 top_level = true
+light_mask = 0
+visibility_layer = 3
 z_index = 50
 offset_left = 10.0
 offset_top = 10.0
@@ -31,6 +33,7 @@ script = SubResource("GDScript_sgyjg")
 [node name="bg" type="PanelContainer" parent="."]
 process_mode = 2
 visible = false
+light_mask = 0
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,19 +44,23 @@ size_flags_vertical = 3
 theme = ExtResource("2_l3buo")
 
 [node name="panel" type="PanelContainer" parent="bg"]
+light_mask = 0
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="vbox" type="VBoxContainer" parent="bg/panel"]
+light_mask = 0
 layout_mode = 2
 
 [node name="title" type="Label" parent="bg/panel/vbox"]
+light_mask = 0
 layout_mode = 2
 text = "MENU"
 horizontal_alignment = 1
 
 [node name="grid" type="GridContainer" parent="bg/panel/vbox"]
+light_mask = 0
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -62,16 +69,19 @@ theme_override_constants/v_separation = 10
 
 [node name="resume" type="Button" parent="bg/panel/vbox/grid"]
 unique_name_in_owner = true
+light_mask = 0
 layout_mode = 2
 text = "resume"
 
 [node name="restart" type="Button" parent="bg/panel/vbox/grid"]
 unique_name_in_owner = true
+light_mask = 0
 layout_mode = 2
 text = "restart"
 
 [node name="quit" type="Button" parent="bg/panel/vbox/grid"]
 unique_name_in_owner = true
+light_mask = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(0.639216, 0, 0, 1)
 text = "quit"

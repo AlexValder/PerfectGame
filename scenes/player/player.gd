@@ -4,7 +4,6 @@ class_name Player
 signal active_item_change(id, item)
 
 @onready var camera := $camera as PlayerCamera
-@onready var hand := $mesh/hand as RayCast3D
 @onready var inventory := $inventory as Inventory
 @onready var reach := $mesh/grabbable as Area3D
 @onready var _mesh := $mesh as MeshInstance3D
@@ -16,6 +15,15 @@ const RUN_WALK_THRESHOLD := 0.5
 
 const GRAVITY := 98.0 / 2
 const ANGLE_ACC := 10.0
+
+
+func rotate_player_joy(input: float, delta: float) -> void:
+    rotate_player(input, delta)
+
+
+func rotate_player_mouse() -> void:
+    var angle := camera.get_angle()
+    rotate_player(angle, 1.0/60)
 
 
 func rotate_player(angle: float, delta: float) -> void:
@@ -46,10 +54,10 @@ func _try_action() -> void:
 
 
 func _use_hand() -> bool:
-    if !hand.is_colliding():
+    if !camera.hand.is_colliding():
         return false
 
-    var collider := hand.get_collider()
+    var collider := camera.hand.get_collider()
 
     var door := collider.owner as Door
     if door != null:

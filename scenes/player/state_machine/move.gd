@@ -1,9 +1,15 @@
 extends PlayerState
 
 
+func on_enter() -> void:
+    player.camera.is_fpv = false
+
+
 func physics_process(delta: float) -> void:
     if !player.is_on_floor():
         state_change.emit(self.name, "fall")
+
+    _rotate_camera(delta)
 
     var velocity := player.velocity
 
@@ -21,6 +27,12 @@ func physics_process(delta: float) -> void:
 
     player.velocity = velocity
     player.move_and_slide()
+
+
+func unhandled_input(event: InputEvent) -> void:
+    super.unhandled_input(event)
+    if event.is_action_pressed("fpv"):
+        state_change.emit(self.name, "fpv_idle")
 
 
 func _get_speed(vel: Vector2) -> float:

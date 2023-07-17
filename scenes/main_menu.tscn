@@ -54,6 +54,10 @@ mesh = SubResource("BoxMesh_3ducl")
 [node name="omni_light_3d" type="OmniLight3D" parent="env"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.815974, 0.163467, -5.3748)
 
+[node name="timer" type="Timer" parent="env/omni_light_3d"]
+one_shot = true
+autostart = true
+
 [node name="gui" type="CanvasLayer" parent="."]
 
 [node name="vbox" type="VBoxContainer" parent="gui"]
@@ -84,6 +88,7 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "quit"
 
+[connection signal="timeout" from="env/omni_light_3d/timer" to="." method="_on_light_timer_timeout"]
 [connection signal="button_up" from="gui/vbox/play" to="." method="_on_play_button_up"]
 [connection signal="button_up" from="gui/vbox/options" to="." method="_on_options_button_up"]
 [connection signal="button_up" from="gui/vbox/quit" to="." method="_on_quit_button_up"]

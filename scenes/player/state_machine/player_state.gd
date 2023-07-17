@@ -28,3 +28,17 @@ func physics_process(_delta: float) -> void:
 
 func process(_delta: float) -> void:
     pass
+
+
+func unhandled_input(event: InputEvent) -> void:
+    if event is InputEventMouseMotion:
+        var e := event as InputEventMouseMotion
+        player.camera.rotate_camera_mouse(e.relative)
+
+
+func _rotate_camera(delta: float) -> void:
+    var input := Input.get_vector(
+        "camera_right", "camera_left", "camera_down", "camera_up")
+
+    player.camera.rotate_camera_joy(input, delta)
+

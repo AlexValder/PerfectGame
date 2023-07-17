@@ -6,7 +6,7 @@ class_name StateMachine
 @onready var _label := $label as Label
 
 
-func _ready() -> void:
+func _on_player_ready() -> void:
     self.top_level = true
 
     var states := get_children()
@@ -20,6 +20,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
     current_state.physics_process(delta)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+    current_state.unhandled_input(event)
 
 
 func _on_state_change(prev: String, next: String) -> void:

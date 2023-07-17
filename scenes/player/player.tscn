@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://btclomjrxggh2"]
+[gd_scene load_steps=17 format=3 uid="uid://btclomjrxggh2"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_54437"]
 [ext_resource type="PackedScene" uid="uid://b051dp5pmr4yd" path="res://scenes/player/camera.tscn" id="2_a8qjp"]
@@ -6,10 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://bbcerdyuloc17" path="res://scenes/player/gui/hud.tscn" id="3_70omf"]
 [ext_resource type="Script" path="res://scenes/player/state_machine/state_machine.gd" id="3_hp0jh"]
 [ext_resource type="Script" path="res://scenes/player/state_machine/idle.gd" id="4_gehqd"]
-[ext_resource type="Script" path="res://scenes/player/state_machine/walk_run.gd" id="5_6p40c"]
 [ext_resource type="Script" path="res://scenes/player/state_machine/fall.gd" id="6_1ccf3"]
+[ext_resource type="Script" path="res://scenes/player/state_machine/move.gd" id="6_f7kk5"]
+[ext_resource type="Script" path="res://scenes/player/state_machine/fpv_idle.gd" id="8_qkci6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ys1yu"]
+height = 1.7
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_lvtfc"]
 
@@ -23,6 +25,7 @@ albedo_texture = SubResource("NoiseTexture2D_rtrnf")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_mhf18"]
 material = SubResource("StandardMaterial3D_y6rel")
+height = 1.7
 radial_segments = 8
 rings = 2
 
@@ -30,7 +33,7 @@ rings = 2
 size = Vector3(0.15, 1, 0.15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8miqn"]
-size = Vector3(2.24735, 1.99363, 1.7231)
+size = Vector3(2, 1.75, 1.5)
 
 [node name="player" type="CharacterBody3D"]
 collision_layer = 2
@@ -41,26 +44,22 @@ script = ExtResource("1_54437")
 
 [node name="inventory" parent="." instance=ExtResource("2_qbd05")]
 
-[node name="camera" parent="." instance=ExtResource("2_a8qjp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29527, 0)
+[node name="camera" parent="." node_paths=PackedStringArray("player_model") instance=ExtResource("2_a8qjp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+player_model = NodePath("../mesh")
 
 [node name="shape" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CapsuleShape3D_ys1yu")
 
 [node name="mesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 mesh = SubResource("CapsuleMesh_mhf18")
 
 [node name="arm" type="MeshInstance3D" parent="mesh"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.4, -0.4)
+layers = 2
 mesh = SubResource("BoxMesh_klwus")
-
-[node name="hand" type="RayCast3D" parent="mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.393561, 0)
-target_position = Vector3(0, 0, -1.5)
-collision_mask = 28
-debug_shape_custom_color = Color(0, 0, 1, 1)
 
 [node name="grabbable" type="Area3D" parent="mesh"]
 collision_layer = 0
@@ -68,7 +67,7 @@ collision_mask = 8
 monitorable = false
 
 [node name="shape" type="CollisionShape3D" parent="mesh/grabbable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.759821)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.667725)
 shape = SubResource("BoxShape3D_8miqn")
 
 [node name="state_machine" type="Node3D" parent="."]
@@ -78,7 +77,7 @@ script = ExtResource("3_hp0jh")
 script = ExtResource("4_gehqd")
 
 [node name="move" type="Node" parent="state_machine"]
-script = ExtResource("5_6p40c")
+script = ExtResource("6_f7kk5")
 
 [node name="fall" type="Node" parent="state_machine"]
 script = ExtResource("6_1ccf3")
@@ -95,4 +94,9 @@ text = "STATE: %s"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="fpv_idle" type="Node" parent="state_machine"]
+script = ExtResource("8_qkci6")
+
 [node name="HUD" parent="." instance=ExtResource("3_70omf")]
+
+[connection signal="ready" from="." to="state_machine" method="_on_player_ready"]

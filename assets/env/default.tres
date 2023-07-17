@@ -4,4 +4,12 @@
 ambient_light_source = 2
 ambient_light_color = Color(0.619608, 0.619608, 0.619608, 1)
 tonemap_mode = 2
-volumetric_fog_emission = Color(1, 1, 1, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.04
+volumetric_fog_albedo = Color(0.137255, 0.407843, 1, 1)
+volumetric_fog_emission = Color(0.709804, 0.886275, 0.992157, 1)
+volumetric_fog_emission_energy = 0.2
+volumetric_fog_temporal_reprojection_enabled = false
+adjustment_enabled = true
+adjustment_contrast = 1.2
+adjustment_saturation = 0.7

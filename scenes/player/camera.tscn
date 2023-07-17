@@ -1,15 +1,46 @@
-[gd_scene load_steps=3 format=3 uid="uid://b051dp5pmr4yd"]
+[gd_scene load_steps=4 format=3 uid="uid://b051dp5pmr4yd"]
 
 [ext_resource type="Script" path="res://scenes/player/camera.gd" id="1_venst"]
-[ext_resource type="Environment" uid="uid://c24w8n5qcm5ig" path="res://assets/env/default.tres" id="2_xs0qa"]
+[ext_resource type="Script" path="res://scenes/player/fpv_camera.gd" id="3_2o8ak"]
+[ext_resource type="Texture2D" uid="uid://buw1x3qk6j61w" path="res://assets/gui/icons/crosshair_normal.png" id="4_pi0rp"]
 
 [node name="camera" type="Node3D"]
 script = ExtResource("1_venst")
 mouse_sensitivity = 0.005
 
 [node name="arm" type="SpringArm3D" parent="."]
-spring_length = 5.0
+spring_length = 3.0
 
 [node name="camera" type="Camera3D" parent="arm"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
-environment = ExtResource("2_xs0qa")
+cull_mask = 3
+current = true
+
+[node name="fpv_camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.284832, 0)
+cull_mask = 1
+script = ExtResource("3_2o8ak")
+
+[node name="crosshair" type="TextureRect" parent="fpv_camera"]
+visible = false
+light_mask = 0
+visibility_layer = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_pi0rp")
+stretch_mode = 4
+
+[node name="hand" type="RayCast3D" parent="fpv_camera"]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -1.5)
+collision_mask = 28
+debug_shape_custom_color = Color(0, 0, 1, 1)
