@@ -38,19 +38,20 @@ func get_angle() -> float:
 
 func rotate_fpv(angle: float, delta: float) -> void:
     _1st_camera.rotation.y = lerp_angle(
-            _1st_camera.rotation.y, angle, delta)
+            _1st_camera.rotation.y, _1st_camera.rotation.y + angle, delta)
 
 
 func rotate_camera_joy(input: Vector2, delta: float) -> void:
     if is_fpv:
         _1st_camera.rotation.x = clampf(_1st_camera.rotation.x +\
-            input.x * joy_sensitivity * delta, FPV_MIN, FPV_MAX)
+            input.y * joy_sensitivity * delta, FPV_MIN, FPV_MAX)
         _1st_camera.rotation.y = lerp_angle(_1st_camera.rotation.y,
-            _1st_camera.rotation.y - input.y * joy_sensitivity * delta, 0.4)
+            _1st_camera.rotation.y + input.x * joy_sensitivity * delta, 1.0)
     else:
-        _arm.rotation.y += input.x * joy_sensitivity * delta
-        _arm.rotation.x = clampf(
-            _arm.rotation.x - input.y * joy_sensitivity * delta, MIN_Y, MAX_Y)
+        _arm.rotation.x = clampf(_arm.rotation.x -\
+            input.y * joy_sensitivity * delta, MIN_Y, MAX_Y)
+        _arm.rotation.y = lerp_angle(_arm.rotation.y, _arm.rotation.y +\
+            input.x * joy_sensitivity * delta, 1.0)
 
 
 func rotate_camera_mouse(input: Vector2) -> void:

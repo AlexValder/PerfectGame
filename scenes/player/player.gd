@@ -17,20 +17,14 @@ const GRAVITY := 98.0 / 2
 const ANGLE_ACC := 10.0
 
 
-func rotate_player_joy(input: float, delta: float) -> void:
-    rotate_player(input, delta)
+func rotate_player_at_angle(angle: float, delta: float) -> void:
+    _mesh.rotation.y = lerp_angle(_mesh.rotation.y, angle, delta * ANGLE_ACC)
+    _shape.rotation.y = lerp_angle(_shape.rotation.y, angle, delta * ANGLE_ACC)
 
 
-func rotate_player_mouse() -> void:
+func rotate_player() -> void:
     var angle := camera.get_angle()
-    rotate_player(angle, 1.0/60)
-
-
-func rotate_player(angle: float, delta: float) -> void:
-    _mesh.rotation.y = lerp_angle(
-        _mesh.rotation.y, angle, delta * Player.ANGLE_ACC)
-    _shape.rotation.y = lerp_angle(
-        _shape.rotation.y, angle, delta * Player.ANGLE_ACC)
+    rotate_player_at_angle(angle, 1.0/60)
 
 
 func _unhandled_input(event: InputEvent) -> void:

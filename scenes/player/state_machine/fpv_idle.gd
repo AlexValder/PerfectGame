@@ -13,7 +13,8 @@ func physics_process(delta: float) -> void:
     var input := Input.get_vector(
         "camera_right", "camera_left", "camera_down", "camera_up")
     if !is_zero_approx(input.length()):
-        player.rotate_player_joy(input.x, delta)
+        player.camera.rotate_camera_joy(input, delta)
+        player.rotate_player()
 
     player.move_and_slide()
 
@@ -24,4 +25,4 @@ func unhandled_input(event: InputEvent) -> void:
         state_change.emit(self.name, "idle")
 
     if event is InputEventMouseMotion:
-        player.rotate_player_mouse()
+        player.rotate_player()

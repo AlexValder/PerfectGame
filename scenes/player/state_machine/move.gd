@@ -21,7 +21,7 @@ func physics_process(delta: float) -> void:
 
     if velocity.length() > 0:
         var look_dir := -Vector2(velocity.z, velocity.x)
-        player.rotate_player(look_dir.angle(), delta)
+        player.rotate_player_at_angle(look_dir.angle(), delta)
     else:
         state_change.emit(self.name, "idle")
 
