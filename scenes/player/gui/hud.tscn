@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbcerdyuloc17"]
+[gd_scene load_steps=6 format=3 uid="uid://bbcerdyuloc17"]
 
 [ext_resource type="Script" path="res://scenes/player/gui/hud.gd" id="1_md18c"]
 [ext_resource type="Theme" path="res://assets/gui/default_theme.tres" id="2_l3buo"]
+[ext_resource type="Script" path="res://scenes/player/gui/controls_bg.gd" id="3_qh8hr"]
 
 [sub_resource type="GDScript" id="GDScript_sgyjg"]
 script/source = "extends Label
@@ -10,6 +11,9 @@ script/source = "extends Label
 func _process(_delta: float) -> void:
     text = \"%d FPS\" % Engine.get_frames_per_second()
 "
+
+[sub_resource type="LabelSettings" id="LabelSettings_0irch"]
+font_size = 24
 
 [node name="HUD" type="CanvasLayer"]
 process_mode = 3
@@ -32,7 +36,6 @@ script = SubResource("GDScript_sgyjg")
 
 [node name="bg" type="PanelContainer" parent="."]
 process_mode = 2
-visible = false
 light_mask = 0
 anchors_preset = 15
 anchor_right = 1.0
@@ -74,18 +77,67 @@ layout_mode = 2
 text = "resume"
 
 [node name="restart" type="Button" parent="bg/panel/vbox/grid"]
-unique_name_in_owner = true
 light_mask = 0
 layout_mode = 2
 text = "restart"
 
+[node name="controls" type="Button" parent="bg/panel/vbox/grid"]
+light_mask = 0
+layout_mode = 2
+text = "controls"
+
 [node name="quit" type="Button" parent="bg/panel/vbox/grid"]
-unique_name_in_owner = true
 light_mask = 0
 layout_mode = 2
 theme_override_colors/font_color = Color(0.639216, 0, 0, 1)
 text = "quit"
 
+[node name="controls_bg" type="AcceptDialog" parent="."]
+disable_3d = true
+title = "Controls"
+initial_position = 2
+size = Vector2i(620, 400)
+unresizable = true
+always_on_top = true
+min_size = Vector2i(500, 400)
+theme = ExtResource("2_l3buo")
+script = ExtResource("3_qh8hr")
+
+[node name="scroll" type="ScrollContainer" parent="controls_bg"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="vbox" type="VBoxContainer" parent="controls_bg/scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="label" type="Label" parent="controls_bg/scroll/vbox"]
+layout_mode = 2
+text = "Scroll with MouseWheel/Right Stick"
+label_settings = SubResource("LabelSettings_0irch")
+horizontal_alignment = 1
+
+[node name="grid" type="GridContainer" parent="controls_bg/scroll/vbox"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme = ExtResource("2_l3buo")
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 5
+columns = 3
+
 [connection signal="button_up" from="bg/panel/vbox/grid/resume" to="." method="_on_resume_button_up"]
 [connection signal="button_up" from="bg/panel/vbox/grid/restart" to="." method="_on_restart_button_up"]
+[connection signal="button_up" from="bg/panel/vbox/grid/controls" to="." method="_on_controls_button_up"]
 [connection signal="button_up" from="bg/panel/vbox/grid/quit" to="." method="_on_quit_button_up"]

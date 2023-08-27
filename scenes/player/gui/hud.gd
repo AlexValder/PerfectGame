@@ -2,6 +2,7 @@ extends CanvasLayer
 
 @onready var _panel := $bg as PanelContainer
 @onready var _resume := $%resume as Button
+@onready var _controls := $controls_bg as AcceptDialog
 
 
 func _ready() -> void:
@@ -32,6 +33,10 @@ func _on_restart_button_up() -> void:
     Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
     get_tree().reload_current_scene()
     get_tree().paused = false
+
+
+func _on_controls_button_up() -> void:
+    _controls.popup_centered()
 
 
 func _on_quit_button_up() -> void:
